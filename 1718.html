@@ -1,0 +1,13 @@
+
+<h1>
+[
+        OAuth access token Failure Errors are Masked
+      ]
+</h1>
+
+
+<h2>details</h2>
+<pre><code>github_app = github.Github().get_oauth_application(CLIENT_ID, CLIENT_SECRET)
+response = github_app.get_access_token(CALLBACK_CODE)
+# r.token, r.scope, and r.type are all `None`, and r._token is `NotSet`
+</code></pre>
