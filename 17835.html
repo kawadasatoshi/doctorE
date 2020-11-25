@@ -1,0 +1,24 @@
+
+<h1>
+[
+        linalg.lstsq nan error not caught by numpy, get MKL error message
+      ]
+</h1>
+
+
+<h2>details</h2>
+<pre><span class="pl-k">import</span> <span class="pl-s1">numpy</span> <span class="pl-k">as</span> <span class="pl-s1">np</span>
+<span class="pl-v">N</span> <span class="pl-c1">=</span> <span class="pl-c1">2</span>
+<span class="pl-v">A</span> <span class="pl-c1">=</span> <span class="pl-s1">np</span>.<span class="pl-en">empty</span>((<span class="pl-v">N</span>,<span class="pl-v">N</span>))
+<span class="pl-s1">b</span> <span class="pl-c1">=</span> <span class="pl-s1">np</span>.<span class="pl-en">empty</span>(<span class="pl-v">N</span>)
+<span class="pl-v">A</span>[:]<span class="pl-c1">=</span> <span class="pl-s1">np</span>.<span class="pl-s1">nan</span>
+<span class="pl-s1">b</span>[:]<span class="pl-c1">=</span> <span class="pl-s1">np</span>.<span class="pl-s1">nan</span>
+<span class="pl-s1">x</span> <span class="pl-c1">=</span> <span class="pl-s1">np</span>.<span class="pl-s1">linalg</span>.<span class="pl-en">lstsq</span>(<span class="pl-v">A</span>,<span class="pl-s1">b</span>,<span class="pl-s1">rcond</span><span class="pl-c1">=</span><span class="pl-c1">None</span>)[<span class="pl-c1">0</span>]</pre><pre><code>Intel MKL ERROR: Parameter 4 was incorrect on entry to DGELSD.
+</code></pre><pre><code>Traceback (most recent call last):
+  File "/home/efwillia/Desktop/research/Belgium/interferometry/Gibraltar_tomo/tomo_tomo/bug_ex.py", line 14, in &lt;module&gt;
+    x = np.linalg.lstsq(A,b,rcond=None)[0]
+  File "&lt;__array_function__ internals&gt;", line 5, in lstsq
+  File "/home/efwillia/anaconda3/envs/newnumpy/lib/python3.9/site-packages/numpy/linalg/linalg.py", line 2306, in lstsq
+    x, resids, rank, s = gufunc(a, b, rcond, signature=signature, extobj=extobj)
+ValueError: On entry to DLASCL parameter number 4 had an illegal value
+</code></pre>
