@@ -1,0 +1,4 @@
+{'title': '\n        OAuth access token Failure Errors are Masked\n      ', 'details': [<pre><code>github_app = github.Github().get_oauth_application(CLIENT_ID, CLIENT_SECRET)
+response = github_app.get_access_token(CALLBACK_CODE)
+# r.token, r.scope, and r.type are all `None`, and r._token is `NotSet`
+</code></pre>], 'name': '_________OAuth_access_token_Failure_Errors_are_Masked_______'}
