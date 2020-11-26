@@ -1,0 +1,18 @@
+{'title': '\n        403 error for otherwise functional token\n      ', 'details': [<pre><span class="pl-k">import</span> <span class="pl-s1">json</span>
+<span class="pl-k">from</span> <span class="pl-s1">github</span> <span class="pl-k">import</span> <span class="pl-v">Github</span>
+
+<span class="pl-k">with</span> <span class="pl-en">open</span>(<span class="pl-s">"./token.json"</span>, <span class="pl-s">"r"</span>) <span class="pl-k">as</span> <span class="pl-s1">f</span>:
+    <span class="pl-s1">auth_token</span> <span class="pl-c1">=</span> <span class="pl-s1">json</span>.<span class="pl-en">load</span>(<span class="pl-s1">f</span>)[<span class="pl-s">"token"</span>]
+
+<span class="pl-s1">g</span> <span class="pl-c1">=</span> <span class="pl-v">Github</span>(<span class="pl-s1">auth_token</span>)
+
+<span class="pl-s1">repo</span> <span class="pl-c1">=</span> <span class="pl-en">next</span>(<span class="pl-en">iter</span>(<span class="pl-s1">g</span>.<span class="pl-en">get_user</span>().<span class="pl-en">get_repos</span>()))
+<span class="pl-c"># this fails with a 403</span>
+<span class="pl-en">print</span>(<span class="pl-s1">repo</span>.<span class="pl-en">get_views_traffic</span>())</pre>, <pre><code>{'message': 'Must have push access to repository', 'documentation_url': 'https://docs.github.com/rest/reference/repos#get-repository-clones'}
+Traceback (most recent call last):
+  File "./requests_fails.py", line 13, in &lt;module&gt;
+    r.raise_for_status()
+  File "/home/sean/.local/share/virtualenvs/pygithub_requests_error-nXm25YLC-/home/sean/.local/share/pyenv/shims/python/lib/python3.8/site-packages/requests/models.py", line 941, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://api.github.com/repos/seanbreckenridge/albums/traffic/clones
+</code></pre>], 'name': '_________403_error_for_otherwise_functional_token_______'}
